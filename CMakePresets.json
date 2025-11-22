@@ -1,0 +1,135 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/../build/${hostSystemName}/${presetName}",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": {
+          "type": "PATH",
+          "value": "${sourceDir}/../install/${hostSystemName}"
+        },
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": {
+          "type": "PATH",
+          "value": "${sourceDir}/../build/${hostSystemName}/${presetName}/bin"
+        },
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true
+      }
+    },
+    {
+      "name": "windows-default",
+      "inherits": [
+        "default"
+      ],
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "C:\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake"
+        },
+        "ENABLE_PROFILING": true,
+        "CMAKE_C_COMPILER": "cl",
+        "CMAKE_CXX_COMPILER": "cl"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "linux-default",
+      "inherits": [
+        "default"
+      ],
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "~/vcpkg/scripts/buildsystems/vcpkg.cmake"
+        },
+        "ENABLE_PROFILING": true,
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      }
+    },
+    {
+      "name": "msvc-x64-debug",
+      "displayName": "x64-debug",
+      "description": "Default build using Ninja generator",
+      "inherits": [
+        "windows-default"
+      ],
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "msvc-x64-RelWithDebInfo",
+      "displayName": "x64-RelWithDebInfo",
+      "description": "Default build using Ninja generator",
+      "inherits": [
+        "windows-default"
+      ],
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "msvc-x64-release",
+      "displayName": "x64-release",
+      "description": "Default build using Ninja generator",
+      "inherits": [
+        "windows-default"
+      ],
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "gcc-x64-debug",
+      "displayName": "x64-debug",
+      "inherits": [
+        "linux-default"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "gcc-x64-RelWithDebInfo",
+      "displayName": "x64-RelWithDebInfo",
+      "inherits": [
+        "linux-default" 
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    },
+    {
+      "name": "gcc-x64-release",
+      "displayName": "x64-release",
+      "inherits": [
+        "linux-default"
+      ],
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ]
+}
