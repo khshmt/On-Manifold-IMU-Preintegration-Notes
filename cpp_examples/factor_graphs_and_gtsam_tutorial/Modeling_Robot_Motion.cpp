@@ -47,17 +47,15 @@ int main() {
 
 	// optimize using Levenberg-Marquardt optimization
 	gtsam::Values result = gtsam::LevenbergMarquardtOptimizer(graph, initialEstimate).optimize();
-
+	// compute and display marginals
+	// marginal covarinances give uncertainty of each variable in the graph
 	gtsam::Marginals marginals(graph, result);
 
 	graph.print("Factor Graph:\n");
-
 	initialEstimate.print("Initial Estimate:\n");
-
 	std::cout << "x1 covariance:\n" << marginals.marginalCovariance(1) << "\n\n";
 	std::cout << "x2 covariance:\n" << marginals.marginalCovariance(2) << "\n\n";
 	std::cout << "x3 covariance:\n" << marginals.marginalCovariance(3) << "\n\n";
-
 	result.print("Final Result:\n");
 
 	return 0;
