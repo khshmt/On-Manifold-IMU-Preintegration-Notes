@@ -5,8 +5,11 @@ set(CMAKE_CXX_STANDARD 20)
 
 find_package(GTSAM CONFIG REQUIRED)
 
-add_executable(Modeling_Robot_Motion "cpp_examples/factor_graphs_and_gtsam_tutorial/Modeling_Robot_Motion.cpp")
+add_executable(Modeling_Robot_Motion "cpp_examples/factor_graphs_and_gtsam_tutorial/0_Modeling_Robot_Motion.cpp")
 target_link_libraries(Modeling_Robot_Motion PRIVATE gtsam)
 
-add_executable(Robot_Localization "cpp_examples/factor_graphs_and_gtsam_tutorial/Robot_Localization.cpp")
+add_executable(Robot_Localization "cpp_examples/factor_graphs_and_gtsam_tutorial/1_Robot_Localization.cpp")
 target_link_libraries(Robot_Localization PRIVATE gtsam)
+
+add_executable(Pose_SLAM "cpp_examples/factor_graphs_and_gtsam_tutorial/2_Pose_SLAM.cpp")
+target_link_libraries(Pose_SLAM PRIVATE gtsam)
